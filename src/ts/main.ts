@@ -5,4 +5,6 @@ let app = createApp(Home)
 
 app.use(dbTodo, { db: localStorage })
 
-app.mount('#app')
+app.mount('#app').$props = {
+  title: "test"
+}
