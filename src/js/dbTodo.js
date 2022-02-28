@@ -1,12 +1,13 @@
 import TodoApi from './TodoApp'
 
+let testing = {
+  created() {
+    console.log(this)
+  },
+}
+
 export default {
   install: (app, options) => {
-    let { db } = options
-    if (typeof db === 'object') {
-      console.log(db, app)
-    } else {
-      throw 'require db'
-    }
+    console.log(app.mixin(testing))
   },
 }
