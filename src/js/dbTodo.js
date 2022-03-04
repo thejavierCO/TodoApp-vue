@@ -1,13 +1,14 @@
-import TodoApi from './TodoApp'
-
-let testing = {
-  created() {
-    console.log(this)
+let testing = ({ use }) => ({
+  created(a) {
+    console.log(a, use)
   },
-}
+  mounted() {
+    use.init()
+  },
+})
 
 export default {
   install: (app, options) => {
-    console.log(app.mixin(testing))
+    app.mixin(testing(options))
   },
 }
