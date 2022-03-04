@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ title }}</h1>
-    <Button title="init" v-on="add" />
+    <Button title="init" />
   </div>  
 </template>
 
