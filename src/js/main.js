@@ -4,11 +4,10 @@ import { createApp } from 'vue'
 import TodoApi from './TodoApp'
 
 let app = createApp(HomeV, {
-  title: 'Hola',
+  title: 'My app in working',
 })
 
 app.use(dbTodo, {
-  dbtype: 'local',
   use: new TodoApi(
     JSON.parse(localStorage.getItem('items')) ||
       JSON.stringify(localStorage.setItem('items', '{}')),
