@@ -1,33 +1,30 @@
-// let testing = ({ use }) => ({
-//   created() {
-//     console.log(use, this)
-//   },
-//   mounted() {
-//     use.init()
-//   },
-// })
+let testing = ({ use }) => ({
+  created() {
+    if (this.$options.hasOwnProperty('events')) {
+      // console.log(Object.keys(this.$options.events))
+      if (this.$options.events.hasOwnProperty('update')) {
+        if (typeof this.$options.events.update === 'function') {
+          use.on('update', this.$options.events.update)
+        }
+      } else if (this.$options.events.hasOwnProperty('delete')) {
+        if (typeof this.$options.events.delete === 'function') {
+          use.on('delete', this.$options.events.delete)
+        }
+      } else if (this.$options.events.hasOwnProperty('clear')) {
+        if (typeof this.$options.events.clear === 'function') {
+          use.on('clear', this.$options.events.clear)
+        }
+      }
+    }
+    console.log(use)
+  },
+  mounted() {
+    use.init()
+  },
+})
 
 export default {
   install: (app, options) => {
-    app.directive('db', (HTML, { modifiers }, component) => {
-      const { use } = options
-      if (modifiers) {
-        const { max, lastItem, firstItem } = modifiers
-        if (HTML.nodeName == 'INPUT') {
-          if (max) {
-            if (typeof HTML.min === 'number') {
-              HTML.max = use.length
-            } else if (typeof HTML.value === 'string') {
-              HTML.value = use.length
-            }
-          } else if (lastItem) {
-          } else if (firstItem) {
-          }
-        } else {
-          console.log('none')
-        }
-      }
-    })
-    // app.mixin(testing(options))
+    app.mixin(testing(options))
   },
 }
