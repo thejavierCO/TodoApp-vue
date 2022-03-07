@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1>{{ title }}</h1>
-    <Form>
+    <!-- <Form>
       <input type="number" name="id"  placeholder="0" min="0" v-db.max>
       <input type="text" name="title" placeholder="title" v-db.lastItem.title>
       <input type="text" name="description" placeholder="description" v-db.lastItem.description>
       <input type="checkbox" name="estado" id="state" v-db.lastItem.state>
       <label for="state">state</label>
       <input type="submit" value="Guardar">
-    </Form>
+    </Form> -->
   </div>  
 </template>
 

@@ -23,6 +23,8 @@ export default {
           } else if (lastItem) {
           } else if (firstItem) {
           }
+        } else {
+          console.log('none')
         }
       }
     })
