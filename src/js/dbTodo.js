@@ -1,25 +1,21 @@
 let testing = ({ use }) => ({
+  data() {
+    return {
+      db: use,
+      dbget: (a) => use.get(a),
+      dbdel: (a) => use.del(a),
+      dbpush: (a) => use.push(a),
+      dbupdate: (a, b) => use.update(a, b),
+    }
+  },
   created() {
     if (this.$options.hasOwnProperty('events')) {
-      // console.log(Object.keys(this.$options.events))
-      if (this.$options.events.hasOwnProperty('update')) {
-        if (typeof this.$options.events.update === 'function') {
-          use.on('update', this.$options.events.update)
+      Object.keys(this.$options.events).forEach((e) => {
+        if (typeof this.$options.events[e] === 'function') {
+          use.on(e, this.$options.events[e])
         }
-      } else if (this.$options.events.hasOwnProperty('delete')) {
-        if (typeof this.$options.events.delete === 'function') {
-          use.on('delete', this.$options.events.delete)
-        }
-      } else if (this.$options.events.hasOwnProperty('clear')) {
-        if (typeof this.$options.events.clear === 'function') {
-          use.on('clear', this.$options.events.clear)
-        }
-      }
+      })
     }
-    console.log(use)
-  },
-  mounted() {
-    use.init()
   },
 })
 
