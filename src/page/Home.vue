@@ -8,6 +8,7 @@
       <input type="checkbox" name="state"/>
       <input type="submit" value="guardar"/>
       <input type="button" value="delete" :class="{ show: exist , hidden: !exist}" name="delete_btn" @click="click"/>
+      <input type="button" value="clear All" @click="clearAll">
     </form>
   </div>  
 </template>
@@ -32,6 +33,9 @@ export default {
       exist:false,
       click({target:{parentNode}}){
         this.dbdel(parentNode.querySelector("input[name='id']").value);
+      },
+      clearAll(){
+        this.db.clear()
       },
       change({target}){
         const {title,description,state} = document.querySelector("form#data").children;
@@ -82,8 +86,9 @@ export default {
       id.max = this.db.length;
       id.value = this.db.length;
     },
-    error:(err)=>{
-      console.warn(err)
+    error:({detail:{msg}})=>{
+      console.warn(msg);
+      alert(msg);
     }
   }
 }

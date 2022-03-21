@@ -108,7 +108,7 @@ export default class Tododb extends EventTarget {
     }
   }
   alert(a) {
-    this.insertEvent('error', { detail: a })
+    this.insertEvent('error', { msg: a })
     return this
   }
   init() {
