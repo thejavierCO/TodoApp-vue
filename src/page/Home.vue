@@ -10,7 +10,7 @@
       <input type="button"    name="delete"       v-db.show.auto value="delete"  v-db.btn.auto/>
       <input type="button"    name="clear"        v-db.btn.auto value="clear All"  />
     </form>
-    <Print data="{{this.db.db}}"/>
+    <Print />
   </div>  
 </template>
 
@@ -20,11 +20,6 @@ export default {
   name:"Home",
   props:{
     title:String
-  },
-  data(){
-    return {
-      exist:false
-    }
   },
   components:{
     Print
@@ -38,14 +33,9 @@ export default {
         "state" : state.checked
         };
       if(data.title!=""||data.description!=""){
-        if(!!this.dbget(id.value)){
-          this.dbupdate(id.value,data);
-        }else{
-          this.dbpush(data);
-        }
-      }else{
-        this.db.alert("require content in title or decription")
-      }
+        if(!!this.dbget(id.value))this.dbupdate(id.value,data);
+        else this.dbpush(data);
+      }else this.db.alert("require content in title or decription");
       title.value = "";
       description.value = "";
       state.checked = false;
@@ -55,8 +45,8 @@ export default {
     update({target}){
       const {id,title,description,state} = document.querySelector("form#data").children;
       localStorage.setItem("items",JSON.stringify(target.db))
-      id.max = this.db.length;
-      id.value = this.db.length;
+      id.max = target.db.length;
+      id.value = target.db.length;
       title.value = "";
       description.value = "";
       state.checked = false;

@@ -10,8 +10,8 @@ let testing = ({ use }) => ({
   created() {
     if (this.$options.hasOwnProperty('events')) {
       Object.keys(this.$options.events).forEach((e) => {
-        if (typeof this.$options.events[e] === 'function')
-          use.on(e, this.$options.events[e])
+        const fn = this.$options.events[e]
+        if (typeof fn === 'function') use.on(e, (evt) => fn(evt, this))
       })
     }
   },
