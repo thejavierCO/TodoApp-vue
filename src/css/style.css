@@ -1,0 +1,7 @@
+
+input[name="delete"].show{
+  display:inline-block;
+}
+input[name="delete"].hidden{
+  display:none;
+}
