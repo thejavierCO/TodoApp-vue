@@ -10,10 +10,12 @@
       <input type="button"    name="delete"       v-db.show.auto value="delete"  v-db.btn.auto/>
       <input type="button"    name="clear"        v-db.btn.auto value="clear All"  />
     </form>
+    <Print data="{{this.db.db}}"/>
   </div>  
 </template>
 
 <script>
+import Print from "../components/printTask.vue";
 export default {
   name:"Home",
   props:{
@@ -23,6 +25,9 @@ export default {
     return {
       exist:false
     }
+  },
+  components:{
+    Print
   },
   methods:{
     saveTask({target:{children}}){
