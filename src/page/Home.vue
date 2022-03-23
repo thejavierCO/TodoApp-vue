@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1>{{ title }}</h1>
+  <div class="content">
+    <div class="title">
+      <h1>{{ title }}</h1>
+    </div>
     <form action="#" @submit.prevent="saveTask" id="data">
       <input type="number"    name="id"           v-db.max.auto min="0"  :value="this.db.length"  />
       <input type="text"      name="title"        v-db.task.onChange placeholder="titulo" />
@@ -13,6 +15,16 @@
     <Print />
   </div>  
 </template>
+
+<style scoped>
+div.content{
+  background:#000;
+  color:#fff;
+}
+form{
+  padding:10px;
+}
+</style>
 
 <script>
 import Print from "../components/printTask.vue";
