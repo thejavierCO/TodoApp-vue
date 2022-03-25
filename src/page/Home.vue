@@ -4,13 +4,13 @@
       <h1>{{ title }}</h1>
     </div>
     <form action="#" @submit.prevent="saveTask" id="data">
-      <input type="number"    name="id"           v-db.max.auto min="0"  :value="this.db.length"  />
-      <input type="text"      name="title"        v-db.task.onChange placeholder="titulo" />
-      <input type="text"      name="description"  v-db.task.onChange placeholder="descripcion" />
+      <input type="number"    name="id"           v-db.max.auto min="0" :value="this.db.length"  />
+      <input type="text"      name="title"        v-db.task.onChange    placeholder="titulo" />
+      <input type="text"      name="description"  v-db.task.onChange    placeholder="descripcion" />
       <input type="checkbox"  name="state"        v-db.task.onChange/>
       <input type="submit"    name="save"         value="guardar"/>
-      <input type="button"    name="delete"       v-db.show.auto value="delete"  v-db.btn.auto/>
-      <input type="button"    name="clear"        v-db.btn.auto value="clear All"  />
+      <input type="button"    name="delete"       v-db.show.auto        value="delete"  v-db.btn.auto/>
+      <input type="button"    name="clear"        v-db.btn.auto         value="clear All"  />
     </form>
     <Print />
   </div>  
