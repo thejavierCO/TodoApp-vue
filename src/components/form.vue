@@ -1,14 +1,19 @@
 <template>
-  <form action="#" @submit.prevent="submit" id="InData">
+  <form action="#" @submit.prevent="save" id="data">
     <slot></slot>
   </form>
 </template>
 
 <script>
 export default {
-  name:"form",
+  name:"Form",
   props:{
     submit:Function
+  },
+  methods:{
+    save(evt){
+      this.$emit("saveTask",evt)
+    }
   }
 }
 </script>

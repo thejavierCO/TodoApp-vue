@@ -3,7 +3,7 @@
     <div class="title">
       <h1>{{ title }}</h1>
     </div>
-    <form action="#" @submit.prevent="saveTask" id="data">
+    <Form @saveTask="saveTask">
       <input type="number"    name="id"           v-db.max.auto min="0" :value="this.db.length"  />
       <input type="text"      name="title"        v-db.task.onChange    placeholder="titulo" />
       <input type="text"      name="description"  v-db.task.onChange    placeholder="descripcion" />
@@ -11,8 +11,8 @@
       <input type="submit"    name="save"         value="guardar"/>
       <input type="button"    name="delete"       v-db.show.auto        value="delete"  v-db.btn.auto/>
       <input type="button"    name="clear"        v-db.btn.auto         value="clear All"  />
-    </form>
-    <Print />
+    </Form>
+    <Print :data="tasks"/>
   </div>  
 </template>
 
@@ -28,13 +28,23 @@ form{
 
 <script>
 import Print from "../components/printTask.vue";
+import Form from "../components/form.vue";
 export default {
   name:"Home",
   props:{
     title:String
   },
+  data(){
+    return {
+      tasks:this.db.db
+    }
+  },
   components:{
-    Print
+    Print,
+    Form
+  },
+  updated(){
+    console.log("up")
   },
   methods:{
     saveTask({target:{children}}){
@@ -55,8 +65,9 @@ export default {
   },
   events:{
     update({target}){
+      this.tasks = target.db;
+      localStorage.setItem("items",JSON.stringify(target.db));
       const {id,title,description,state} = document.querySelector("form#data").children;
-      localStorage.setItem("items",JSON.stringify(target.db))
       id.max = target.db.length;
       id.value = target.db.length;
       title.value = "";

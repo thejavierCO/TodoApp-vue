@@ -1,16 +1,21 @@
 <script>
+import BtnTasks from "../components/buttonsTasks.vue";
 export default {
   name:"systemPrint",
+  props:{
+    data:Array
+  },
   data(){
     return {
-      data:this.db.db
+      tasks:[]
     }
   },
-  events(){
-    return {
-      update({target},comp){
-        comp.data = target.db;
-      }
+  components:{
+    BtnTasks
+  },
+  events:{
+    update({target},comp){
+      comp.tasks = target.db;
     }
   }
 }
@@ -20,11 +25,14 @@ export default {
   <div>
     <ul>
       <li v-for="(item , index) in data" v-bind:key="index">
-        <span v-show="item.state">[</span>
-        <span :id="index">
-        {{ item.title }} - {{ item.description }}
-        </span>
-        <span v-show="item.state">]</span>
+        <BtnTasks 
+          :title="item.title" 
+          :description="item.description" 
+          :id="index" 
+          :state="item.state" 
+          @complateTask="$emits('complete',index)"
+          @deleteTask="$emit('delete',index)"
+        ></BtnTasks>
       </li>
     </ul>
   </div>
