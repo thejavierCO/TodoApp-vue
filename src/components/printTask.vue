@@ -6,9 +6,11 @@ export default {
       data:this.db.db
     }
   },
-  events:{
-    update({target:{db}},comp){
-      comp.data = db;
+  events(){
+    return {
+      update({target},comp){
+        comp.data = target.db;
+      }
     }
   }
 }
@@ -17,10 +19,12 @@ export default {
 <template>
   <div>
     <ul>
-      <span>{{data.length}}</span>
-      <li v-for="(item , index) in data">
-        <span v-show="item.state">[complete]</span>
-        {{ item.title }} - {{ item.description }} - {{ index+1 }}
+      <li v-for="(item , index) in data" v-bind:key="index">
+        <span v-show="item.state">[</span>
+        <span :id="index">
+        {{ item.title }} - {{ item.description }}
+        </span>
+        <span v-show="item.state">]</span>
       </li>
     </ul>
   </div>
