@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <van-nav-bar title="{{title}}" />
     <form action="#" @submit.prevent="saveTask" id="data">
       <input type="number"    name="id"           v-db.max.auto min="0"  :value="this.db.length"  />
       <input type="text"      name="title"        v-db.task.onChange placeholder="titulo" />
       <input type="text"      name="description"  v-db.task.onChange placeholder="descripcion" />
       <input type="checkbox"  name="state"        v-db.task.onChange/>
-      <input type="submit"    name="save"         value="guardar"/>
-      <input type="button"    name="delete"       v-db.show.auto value="delete"  v-db.btn.auto/>
-      <input type="button"    name="clear"        v-db.btn.auto value="clear All"  />
+      <van-button type="primary" name="save" @click="submitform">save</van-button>
+      <van-button type="danger" name="delete" v-db.btn.auto>Delete</van-button>
+      <van-button type="danger" name="clear" v-db.btn.auto>Clear All</van-button>
     </form>
   </div>  
 </template>
@@ -44,6 +44,9 @@ export default {
       title.value = "";
       description.value = "";
       state.checked = false;
+    },
+    submitform({target:{parentNode}}){
+      parentNode.dispatchEvent(new Event("submit"))
     }
   },
   events:{

@@ -16,5 +16,8 @@
     "vue": "^3.2.31",
     "vue-template-compiler": "^2.6.14",
     "vue-tsc": "^0.32.0"
+  },
+  "dependencies": {
+    "vant": "^4.8.11"
   }
 }
