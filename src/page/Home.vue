@@ -3,11 +3,11 @@
     <van-nav-bar :title="title" />
     <van-grid :border="false" :column-num="1">
       <van-grid-item>
-        <van-form @submit="onSubmit">
+        <van-form @submit="saveTask" id="data">
           <van-cell-group inset>
             <van-field name="id">
               <template #input>
-                <van-stepper v-model="valueMax" v-db.max.auto min="0"/>
+                <van-stepper v-model="valueMax" max="0" min="0" disable-input/>
               </template>
             </van-field>
             <van-field
@@ -20,20 +20,11 @@
             />
           </van-cell-group>
           <div style="margin: 16px;">
-            <van-button round block type="primary" native-type="submit">
-              Submit
-            </van-button>
+            <van-button type="primary" name="save">save</van-button>
+            <van-button type="danger" name="delete">Delete</van-button>
+            <van-button type="danger" name="clear">Clear All</van-button>
           </div>
         </van-form>
-        <form action="#" @submit.prevent="saveTask" id="data">
-          <input type="number"    name="id"           v-db.max.auto min="0"  :value="this.db.length"  />
-          <input type="text"      name="title"        v-db.task.onChange placeholder="titulo" />
-          <input type="text"      name="description"  v-db.task.onChange placeholder="descripcion" />
-          <input type="checkbox"  name="state"        v-db.task.onChange/>
-          <van-button type="primary" name="save" @click="submitform">save</van-button>
-          <van-button type="danger" name="delete" v-db.btn.auto v-db-show.auto>Delete</van-button>
-          <van-button type="danger" name="clear" v-db.btn.auto>Clear All</van-button>
-        </form>
       </van-grid-item>
     </van-grid>
     <van-grid :column-num="3" v-for="item in dt()" :key="item">
