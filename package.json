@@ -18,6 +18,7 @@
     "vue-tsc": "^0.32.0"
   },
   "dependencies": {
-    "vant": "^4.8.11"
+    "vant": "^4.8.11",
+    "vuetify": "^3.5.16"
   }
 }
