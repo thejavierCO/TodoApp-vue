@@ -44,7 +44,7 @@ export default {
             })
           } else HTML.className = show ? 'show' : hidden ? 'hidden' : ''
         } else if (max && HTML.nodeName == 'INPUT') {
-          const { auto } = modifiers
+          const { auto, get } = modifiers
           if (auto) HTML.max = instance.db.length
           else HTML.max = value
         } else if (btn) {
